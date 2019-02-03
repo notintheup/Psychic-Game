@@ -1,25 +1,43 @@
+//Global variables for Psychic game
+//---------------------------------- 
+var alphaChar = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var numberWins = 0;
+var numberLosses = 0;
+var remaining = 0;
+var userSelect = "";
+var macLetter = "";
 
-    //Array that lists out the options to choose
-    var computerChoices = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-    //Declared variables to display the results
-    var wins = 0;
-    var losses = 0;
-    var guessesLeft = 8;
-    var ties = 0;
+var winsText = document.getElementById("wins-text");
+var lossesText = document.getElementById("losses-text");
+var remaining = document.getElementById("remaining-text");
+var guessesText = document.getElementById("guesses-text");
+var choicesText = document.getElementById("choices-text");
+//Create event handler 
+document.onkeyup = (event) => {
+  userSelect = event.key.toLowerCase();
 
-    //Declared variables that reference the game HTML
-    var winsText = document.getElementById("wins-text");
-    var lossesText = document.getElementById("losses-text");
-    var guessesText = document.getElementById("guesses-text");
-    var tiesText = document.getElementById("ties-text");
+  //Declared variable for Mac
+  var macSelect = () => {
+    macLetter = alphaChar[Math.floor(Math.random() * alphaChar.length)];
+  }
+  //Invoke Mic function
+  macSelect();
 
-    document.onkeyup = function (event) {
+  //Two men enter...one man leaves
+  if (userSelect === macLetter) {
+    numberWins++; remaining--;
+  }
+  if (userSelect != macLetter) {
+    numberLosses++; remaining--;
+  }
+  else if (remaining === 0) {
+    alert("You LOSE!");
+  }
 
-        var userChoice = event.key;
-
-        var computerChoice = computerChoice[Math.floor(Math.random() * computerChoice.length)];
-
-        function updateguessesRemaining() {
-          document.querySelector(' # ' + guessesLeft).innerHTML = "Guesses left: " + guessesLeft;
-        }
-      }
+  
+    winsText.textContent = "wins: " + numberWins;
+    lossesText.textContent = "losses: " + numberLosses;
+    guessesText.textContent = "You guess: " + userSelect;
+    remaining.textContent = remaining;
+    choicesText.textContent = "The computer chose: " + macLetter;
+  }
