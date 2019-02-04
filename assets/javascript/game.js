@@ -10,7 +10,7 @@ var macLetter = "";
 
 var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
-// var remaining = document.getElementById("remaining-text");
+var remaining = document.getElementById("remaining-text");
 var guessesText = document.getElementById("guesses-text");
 var choicesText = document.getElementById("choices-text");
 //Create event handler 
@@ -32,13 +32,14 @@ document.onkeyup = (event) => {
   //Two men enter...one man leaves
   if (userSelect === macLetter) {
     numberWins++;
-    // remaining--;
+    remaining--;
   }
   if (userSelect != macLetter) {
     numberLosses++;
-    // remaining--;
-  } else if (remaining === 0) {
-    alert("You LOSE!");
+    remaining--;
+  } 
+  else if (remaining === 0) {
+    alert("You lose");
   }
 
 
