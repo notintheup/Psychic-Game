@@ -1,12 +1,11 @@
-//Global variables for Psychic game
+//Global variables for computer choices
 //---------------------------------- 
 var alphaChar = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-//State variables
-var numberWins = 0;
-var numberLosses = 0;
+//State variables to start the game
+var wins = 0;
+var losses = 0;
 var userSelect = "";
-var macLetter = "";
 var turns = 9;
 //Variables by id
 var winsText = document.getElementById("wins-text");
@@ -19,9 +18,10 @@ document.onkeyup = (event) => {
   userSelect = event.key.toLowerCase();
   //Restart game
   var restart = function () {
-    userSelect = ""; numberLosses = 0; numberWins = 0;
-    // macSelect();
-    }
+    userSelect = "";
+    losses = 0;
+    wins = 0;
+  }
   //Declared variable for Mac
   var macSelect = () => {
     macLetter = alphaChar[Math.floor(Math.random() * alphaChar.length)];
@@ -31,18 +31,18 @@ document.onkeyup = (event) => {
 
   //Two men enter...one man leaves
   if (userSelect === macLetter) {
-    numberWins = numberWins + 1;
+    wins++;
   }
   if (userSelect != macLetter) {
-    numberLosses = numberLosses + 1;
+    losses++;
   }
   if (turns === 0) {
     alert("You lose!");
     restart();
   }
-
-  winsText.textContent = "wins: " + numberWins;
-  lossesText.textContent = "losses: " + numberLosses;
+  // Display in document
+  winsText.textContent = "wins: " + wins;
+  lossesText.textContent = "losses: " + losses;
   guessesText.textContent = "You guess: " + userSelect;
   leftText.textContent = "Guesses remaining: " + turns;
 }
